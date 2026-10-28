@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Queens Salon & Academy – Leave a Review</title>
+  <meta name="description" content="Loved your visit? Rate Queens Salon & Academy on Google.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdf6f4;
+      --card: #ffffff;
+      --ink: #3b2a2f;
+      --muted: #8a7479;
+      --accent: #b76e79;
+      --accent-dark: #9a5560;
+      --gold: #d9a441;
+      --line: #f0dfdc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, #fbe3e3 0%, transparent 45%),
+        radial-gradient(circle at 90% 100%, #f7e6d4 0%, transparent 45%),
+        var(--bg);
+      min-height: 100vh;
+      padding: 40px 16px 32px;
+    }
+    main { max-width: 520px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 32px; }
+    .crown { font-size: 32px; color: var(--gold); }
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 2.2rem;
+      letter-spacing: .02em;
+      margin-top: 4px;
+    }
+    .tagline { color: var(--muted); font-weight: 300; margin-top: 8px; font-size: .95rem; }
+    .stars { color: var(--gold); letter-spacing: 6px; font-size: 1.3rem; margin-top: 14px; }
+
+    h2 {
+      font-size: .8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .branches { display: grid; gap: 14px; }
+    .branch {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 14px rgba(183, 110, 121, .08);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    a.branch:hover, a.branch:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(183, 110, 121, .18);
+      border-color: var(--accent);
+      outline: none;
+    }
+    .pin {
+      flex: none;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #fbe9ea;
+      display: grid; place-items: center;
+      font-size: 1.2rem;
+    }
+    .info { flex: 1; min-width: 0; }
+    .name { font-weight: 500; font-size: 1.05rem; }
+    .city { color: var(--muted); font-size: .85rem; font-weight: 300; }
+    .cta {
+      flex: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: .8rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    a.branch:hover .cta { background: var(--accent-dark); }
+    .branch.disabled { opacity: .65; cursor: default; }
+    .branch.disabled .cta { background: var(--line); color: var(--muted); }
+
+    footer { text-align: center; margin-top: 32px; color: var(--muted); font-size: .8rem; font-weight: 300; }
+
+    @media (max-width: 380px) {
+      .branch { flex-wrap: wrap; }
+      .cta { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="crown" aria-hidden="true">♛</div>
+      <h1>Queens Salon &amp; Academy</h1>
+      <p class="tagline">Thank you for choosing us. Your feedback helps us shine!</p>
+      <div class="stars" aria-hidden="true">★★★★★</div>
+    </header>
+
+    <h2>Choose your branch</h2>
+    <section class="branches" id="branches"></section>
+
+    <footer>© Queens Salon &amp; Academy</footer>
+  </main>
+
+  <script>
+    // Leave `url` empty to show the branch as "Coming soon" until its link is available.
+    const branches = [
+      { name: "Naubasta",     city: "Kanpur", url: "https://share.google/3M9pLo4k5sCEcnaOY" },
+      { name: "Krishna Nagar", city: "Kanpur", url: "https://share.google/J9yVdabyiCbmRqjyn" },
+      { name: "Barra",        city: "Kanpur", url: "https://share.google/42zJY8614eZxCVgj9" },
+      { name: "Panki",        city: "Kanpur", url: "https://share.google/HlpbXTUDMGNovpUaM" },
+    ];
+
+    const list = document.getElementById("branches");
+    for (const b of branches) {
+      const el = document.createElement(b.url ? "a" : "div");
+      el.className = "branch" + (b.url ? "" : " disabled");
+      if (b.url) {
+        el.href = b.url;
+        el.target = "_blank";
+        el.rel = "noopener";
+      }
+      el.innerHTML =
+        '<div class="pin" aria-hidden="true">📍</div>' +
+        '<div class="info"><div class="name"></div><div class="city"></div></div>' +
+        '<span class="cta"></span>';
+      el.querySelector(".name").textContent = b.name;
+      el.querySelector(".city").textContent = b.city;
+      el.querySelector(".cta").textContent = b.url ? "Review ★" : "Coming soon";
+      list.appendChild(el);
+    }
+  </script>
+</body>
+</html>
