@@ -93,6 +93,7 @@
     .info { flex: 1; min-width: 0; }
     .name { font-weight: 500; font-size: 1.05rem; }
     .city { color: var(--muted); font-size: .85rem; font-weight: 300; }
+    .rating { color: var(--gold); font-size: .85rem; letter-spacing: 3px; margin-top: 2px; }
     .cta {
       flex: none;
       background: var(--accent);
@@ -150,7 +151,7 @@
       }
       el.innerHTML =
         '<div class="pin" aria-hidden="true">📍</div>' +
-        '<div class="info"><div class="name"></div><div class="city"></div></div>' +
+        '<div class="info"><div class="name"></div><div class="city"></div><div class="rating" aria-hidden="true">★★★★★</div></div>' +
         '<span class="cta"></span>';
       el.querySelector(".name").textContent = b.name;
       el.querySelector(".city").textContent = b.city;
